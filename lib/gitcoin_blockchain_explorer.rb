@@ -1,4 +1,4 @@
-'reauire httparty'
+'require httparty'
 
 module GitcoinBlockchainExplorer
   class Explorer
