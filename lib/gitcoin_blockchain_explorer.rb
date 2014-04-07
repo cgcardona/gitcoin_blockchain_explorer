@@ -11,7 +11,6 @@ module GitcoinBlockchainExplorer
       self.cex_api_base = 'https://cex.io/api/'
     end
 
-
     def last_block()
       HTTParty.get("#{self.blockr_api_base}coin/info")['data']
     end
@@ -38,11 +37,11 @@ module GitcoinBlockchainExplorer
     end
         
     def address(public_address)
-      HTTParty.get("#{Figaro.env.blockr_api_base}address/info/#{public_address}")['data']
+      HTTParty.get("#{self.blockr_api_base}address/info/#{public_address}")['data']
     end
         
     def address_transactions(public_address)
-      HTTParty.get("#{Figaro.env.blockr_api_base}address/txs/#{public_address}")['data']
+      HTTParty.get("#{self.blockr_api_base}address/txs/#{public_address}")['data']
     end
   end
 end
