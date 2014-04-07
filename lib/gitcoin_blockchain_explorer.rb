@@ -22,27 +22,27 @@ module GitcoinBlockchainExplorer
     end
 
     def last_transactions(number_of_transactions = 10)
-      HTTParty.get("#{self.blockr_api_base}block/txs/last")
+      HTTParty.get("#{self.blockr_api_base}block/txs/last")['data']
     end
 
     def block(block_number)
-      HTTParty.get("#{self.blockr_api_base}block/info/#{block_number}")
+      HTTParty.get("#{self.blockr_api_base}block/info/#{block_number}")['data']
     end
 
     def block_transactions(block_number)
-      HTTParty.get("#{self.blockr_api_base}block/txs/#{block_number}")
+      HTTParty.get("#{self.blockr_api_base}block/txs/#{block_number}")['data']
     end
 
     def transaction(transaction_hash)
-      HTTParty.get("#{self.blockr_api_base}tx/info/#{transaction_hash}")
+      HTTParty.get("#{self.blockr_api_base}tx/info/#{transaction_hash}")['data']
     end
         
     def address(public_address)
-      HTTParty.get("#{Figaro.env.blockr_api_base}address/info/#{public_address}")
+      HTTParty.get("#{Figaro.env.blockr_api_base}address/info/#{public_address}")['data']
     end
         
     def address_transactions(public_address)
-      HTTParty.get("#{Figaro.env.blockr_api_base}address/txs/#{public_address}")
+      HTTParty.get("#{Figaro.env.blockr_api_base}address/txs/#{public_address}")['data']
     end
   end
 end
