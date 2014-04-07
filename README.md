@@ -9,7 +9,7 @@ In your Gemfile
 ```ruby
 gem 'gitcoin_blockchain_explorer
 gem 'httparty'
-`
+```
 
 We are using `httparty` for the webservice calls to the api endpoints
 
