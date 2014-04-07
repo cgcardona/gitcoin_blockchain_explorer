@@ -6,7 +6,7 @@ The blockchain explorer found at [https://www.gitcoin.co/blockchain](https://www
 
 In your Gemfile
 
-`ruby
+```ruby
 gem 'gitcoin_blockchain_explorer
 gem 'httparty'
 `
