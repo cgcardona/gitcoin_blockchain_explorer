@@ -1,0 +1,12 @@
+Gem::Specification.new do |gem|
+  gem.name        = 'gitcoin_blockchain_explorer'
+  gem.version     = '0.1.1'
+  gem.date        = Date.today.to_s
+  gem.summary     = "Gitcoin.co's Blockchain Explorer"
+  gem.description = "Gitcoin.co's Blockchain Explorer"
+  gem.authors     = ["Carlos Cardona"]
+  gem.email       = 'gitcoin.co@gmail.com'
+  gem.files       = ["lib/gitcoin_blockchain_explorer.rb"]
+  gem.homepage    = 'http://rubygems.org/gems/gitcoin_blockchain_explorer'
+  gem.license     = 'MIT'
+end
