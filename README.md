@@ -6,7 +6,12 @@ The blockchain explorer found at [https://www.gitcoin.co/blockchain] as a gem.
 
 In your Gemfile
 
-`gem 'gitcoin_blockchain_explorer'`
+`
+gem 'gitcoin_blockchain_explorer
+gem 'httparty'
+`
+
+We are using `httparty` for the webservice calls to the api endpoints
 
 And then execute
 
@@ -58,7 +63,7 @@ blockchain_explorer.block_transactions(507)
 blockchain_explorer.transaction('0cb7a777d4dc4bd7ef663492e5b488d1f10fd4d1fea3abc9b642b880b63b2420')
 {"tx"=>"0cb7a777d4dc4bd7ef663492e5b488d1f10fd4d1fea3abc9b642b880b63b2420", "block"=>294594, "confirmations"=>3, "time_utc"=>"2014-04-07T04:11:29Z", "is_coinbased"=>0, "trade"=>{"vins"=>[{"address"=>"1PFBGeyAUH6ncVXmW3F7AYC1ieNGz9Fuks", "is_nonstandard"=>false, "amount"=>-360.0001, "n"=>1, "type"=>0, "vout_tx"=>"e50649d997d347b17d1c7876e4604e2fc0d2fa84367ddfec91899c84e9ccc375"}], "vouts"=>[{"address"=>"1ASy16s7nQr4LSjYp5qNvey2xAuZfu2WpA", "is_nonstandard"=>false, "amount"=>360, "n"=>0, "type"=>1, "is_spent"=>1}]}, "vins"=>[{"address"=>"1PFBGeyAUH6ncVXmW3F7AYC1ieNGz9Fuks", "is_nonstandard"=>false, "amount"=>"-1030.30289696", "n"=>1, "type"=>0, "vout_tx"=>"e50649d997d347b17d1c7876e4604e2fc0d2fa84367ddfec91899c84e9ccc375"}], "vouts"=>[{"address"=>"1ASy16s7nQr4LSjYp5qNvey2xAuZfu2WpA", "is_nonstandard"=>false, "amount"=>"360.00000000", "n"=>0, "type"=>1, "is_spent"=>1, "extras"=>{"asm"=>"OP_DUP OP_HASH160 67a2476c86d6103ef7d1039b31e45673dffa1337 OP_EQUALVERIFY OP_CHECKSIG", "script"=>"76a91467a2476c86d6103ef7d1039b31e45673dffa133788ac", "reqSigs"=>1, "type"=>"pubkeyhash"}}, {"address"=>"1PFBGeyAUH6ncVXmW3F7AYC1ieNGz9Fuks", "is_nonstandard"=>false, "amount"=>"670.30279696", "n"=>1, "type"=>1, "is_spent"=>1, "extras"=>{"asm"=>"OP_DUP OP_HASH160 f40129e15e1df9b0b539bc5144d62f0b8f5664e4 OP_EQUALVERIFY OP_CHECKSIG", "script"=>"76a914f40129e15e1df9b0b539bc5144d62f0b8f5664e488ac", "reqSigs"=>1, "type"=>"pubkeyhash"}}], "fee"=>"0.00010000", "days_destroyed"=>"815.66", "is_unconfirmed"=>false, "extras"=>nil} 
 
-blockchain_explorer.address('19T5kws9a7J4wgqk1qFE6U9uPxd8sK1Ad4')
+blockchain_explorer.address('19T5kws9a7J4wgqk1qFE6U9uPxd8sK1Ad4') => {"address"=>"19T5kws9a7J4wgqk1qFE6U9uPxd8sK1Ad4", "is_unknown"=>false, "balance"=>0, "totalreceived"=>0.00178381, "nb_txs"=>2, "first_tx"=>{"time_utc"=>"2014-04-03T10:16:18Z", "tx"=>"4781290ddd8dfb6b04d0423c7f56d313752060749a5d7dbdfcea04cb12e0fadd", "block_nb"=>"293942", "value"=>0.00178381, "confirmations"=>655}, "last_tx"=>{"time_utc"=>"2014-04-03T17:47:39Z", "tx"=>"9051df0151dd0c2cc339e6cf418cde4ead1c09b0c04a2db910a518dd0403ab7e", "block_nb"=>"294001", "value"=>-0.00178381, "confirmations"=>596}, "is_valid"=>true}
 
 blockchain_explorer.address_transactions('19T5kws9a7J4wgqk1qFE6U9uPxd8sK1Ad4')
 ```
