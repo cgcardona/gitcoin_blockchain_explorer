@@ -1,6 +1,6 @@
 # Gitcoin Blockchain Explorer
 
-The blockchain explorer found at [https://www.gitcoin.co/blockchain] as a gem.
+The blockchain explorer found at [https://www.gitcoin.co/blockchain](https://www.gitcoin.co/blockchain) as a gem.
 
 ## Installation
 
