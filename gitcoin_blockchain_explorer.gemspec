@@ -1,4 +1,4 @@
-require 'gitcoin_blockchain_explorer/version'
+require 'lib/gitcoin_blockchain_explorer/version'
 
 Gem::Specification.new do |gem|
   gem.name           = 'gitcoin_blockchain_explorer'
