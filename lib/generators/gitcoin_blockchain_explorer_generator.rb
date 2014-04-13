@@ -3,21 +3,22 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
 
   def copy_files
     puts 'inject routes'
-    prepend_file 'config/routes.rb' do
-      "\n get 'blockchain', to: 'blockchain#index'\n"
-    end
-    prepend_file 'config/routes.rb' do
-      "\n post 'blockchain/search, to: 'blockchain#search'\n"
-    end
-    prepend_file 'config/routes.rb' do
-      "\n get 'blockchain/block', to 'blockchain#block'\n"
-    end
-    prepend_file 'config/routes.rb' do
-      "\n get 'blockchain/transaction', to 'blockchain#transaction'\n"
-    end
-    prepend_file 'config/routes.rb' do
-      "\n get 'blockchain/address', to 'blockchain#address'\n"
-    end
+    route("add_gem_routes")
+    #prepend_file 'config/routes.rb' do
+    #  "\n get 'blockchain', to: 'blockchain#index'\n"
+    #end
+    #prepend_file 'config/routes.rb' do
+    #  "\n post 'blockchain/search, to: 'blockchain#search'\n"
+    #end
+    #prepend_file 'config/routes.rb' do
+    #  "\n get 'blockchain/block', to 'blockchain#block'\n"
+    #end
+    #prepend_file 'config/routes.rb' do
+    #  "\n get 'blockchain/transaction', to 'blockchain#transaction'\n"
+    #end
+    #prepend_file 'config/routes.rb' do
+    #  "\n get 'blockchain/address', to 'blockchain#address'\n"
+    #end
 
     puts 'Create controller and views'
     ['blockchain_controller', 'index', 'search', 'block', 'transaction'].each_with_index do |page, index|
