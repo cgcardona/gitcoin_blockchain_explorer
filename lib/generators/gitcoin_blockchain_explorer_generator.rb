@@ -5,9 +5,9 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
     puts 'inject routes'
     route("get 'blockchain', to: 'blockchain#index'")
     route("get 'blockchain/search', to: 'blockchain#search'")
-    route("get 'blockchain/block', to: 'blockchain#search'")
-    route("get 'blockchain/transaction', to: 'blockchain#search'")
-    route("get 'blockchain/address', to: 'blockchain#search'")
+    route("get 'blockchain/block', to: 'blockchain#block'")
+    route("get 'blockchain/transaction', to: 'blockchain#transaction'")
+    route("get 'blockchain/address', to: 'blockchain#address'")
 
     puts 'Create controller and views'
     ['blockchain_controller', 'index', 'search', 'block', 'transaction'].each_with_index do |page, index|
