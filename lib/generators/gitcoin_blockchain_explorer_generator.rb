@@ -5,9 +5,17 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
     puts 'inject routes'
     inject_into_file 'config/routes.rb', :before => "  end" do
       "\n get 'blockchain', to: 'blockchain#index'\n\n"
+    end
+    inject_into_file 'config/routes.rb', :before => " get 'blockchain', to: 'blockchain#index'" do
       "\n post 'blockchain/search, to: 'blockchain#search'\n\n"
+    end
+    inject_into_file 'config/routes.rb', :before => " post 'blockchain/search, to: 'blockchain#search'" do
       "\n get 'blockchain/block', to 'blockchain#block'\n\n"
+    end
+    inject_into_file 'config/routes.rb', :before => " get 'blockchain/block', to 'blockchain#block'" do
       "\n get 'blockchain/transaction', to 'blockchain#transaction'\n\n"
+    end
+    inject_into_file 'config/routes.rb', :before => " get 'blockchain/transaction', to 'blockchain#transaction'" do
       "\n get 'blockchain/address', to 'blockchain#address'\n\n"
     end
 
