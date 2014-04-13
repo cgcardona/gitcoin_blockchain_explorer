@@ -3,7 +3,8 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
 
   def copy_files
     puts 'inject routes'
-    route("add_gem_routes")
+    route('get blockchain')
+    route('get blockchain/search')
     #prepend_file 'config/routes.rb' do
     #  "\n get 'blockchain', to: 'blockchain#index'\n"
     #end
