@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name           = 'gitcoin_blockchain_explorer'
-  gem.version        = '0.1.3'
+  gem.version        = '0.1.4'
   gem.date           = Date.today.to_s
   gem.summary        = "Gitcoin.co's Blockchain Explorer"
   gem.description    = "Gitcoin.co's Blockchain Explorer"
