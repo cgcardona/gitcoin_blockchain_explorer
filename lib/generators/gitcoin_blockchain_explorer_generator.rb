@@ -5,6 +5,9 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
     puts 'inject routes'
     route("\"get blockchain\"")
     route("\"get blockchain/search\"")
+    route("\"get blockchain/block\"")
+    route("\"get blockchain/transaction\"")
+    route("\"get blockchain/address\"")
     #prepend_file 'config/routes.rb' do
     #  "\n get 'blockchain', to: 'blockchain#index'\n"
     #end
