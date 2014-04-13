@@ -4,7 +4,7 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
   def copy_files
     puts 'inject routes'
     route("get 'blockchain', to: 'blockchain#index'")
-    route("get 'blockchain/search', to: 'blockchain#search'")
+    route("get 'blockchain/search/:id', to: 'blockchain#search'")
     route("get 'blockchain/block', to: 'blockchain#block'")
     route("get 'blockchain/transaction', to: 'blockchain#transaction'")
     route("get 'blockchain/address', to: 'blockchain#address'")
