@@ -3,7 +3,7 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
 
   def copy_files
     puts 'inject routes'
-    inject_into_file 'config/routes.rb', :before => "  end" do
+    inject_into_file 'config/routes.rb', :before => "draw do" do
       "\n get 'blockchain', to: 'blockchain#index'\n\n"
     end
     inject_into_file 'config/routes.rb', :before => " get 'blockchain', to: 'blockchain#index'" do
