@@ -4,19 +4,10 @@ class GitcoinBlockchainExplorerGenerator < Rails::Generators::NamedBase
   def copy_files
     puts 'inject routes'
     prepend_file 'config/routes.rb' do
-      puts 'index route'
       "\n get 'blockchain', to: 'blockchain#index'\n"
-
-      puts 'search route'
       "\n post 'blockchain/search, to: 'blockchain#search'\n"
-
-      puts 'block route'
       "\n get 'blockchain/block', to 'blockchain#block'\n"
-
-      puts 'transaction route'
       "\n get 'blockchain/transaction', to 'blockchain#transaction'\n"
-
-      puts 'address route'
       "\n get 'blockchain/address', to 'blockchain#address'\n"
     end
 
