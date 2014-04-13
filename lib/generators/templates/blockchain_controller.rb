@@ -34,28 +34,28 @@ class BlockchainController < ApplicationController
   end
 
   def search
-    if params[:search_type] == 'block_height'
-      redirect_to block_path(params[:search].gsub(',', ''))
-    elsif params[:search_type] == 'transaction_hash'
-      redirect_to blockchain_transaction_path(params[:search])
-    elsif params[:search_type] == 'address'
-      redirect_to address_path(params[:search])
-    end
+    #if params[:search_type] == 'block_height'
+    #  redirect_to block_path(params[:search].gsub(',', ''))
+    #elsif params[:search_type] == 'transaction_hash'
+    #  redirect_to blockchain_transaction_path(params[:search])
+    #elsif params[:search_type] == 'address'
+    #  redirect_to address_path(params[:search])
+    #end
   end
 
   def block
-    @block_info_response = HTTParty.get("http://blockr.io/api/v1/block/info/#{params[:id]}")
-    @block_transactions_response = HTTParty.get("http://blockr.io/api/v1/block/txs/#{params[:id]}")
+    #@block_info_response = HTTParty.get("http://blockr.io/api/v1/block/info/#{params[:id]}")
+    #@block_transactions_response = HTTParty.get("http://blockr.io/api/v1/block/txs/#{params[:id]}")
   end
 
   def transaction
-    @transaction_info_response = HTTParty.get("http://blockr.io/api/v1/tx/info/#{params[:id]}")
+    #@transaction_info_response = HTTParty.get("http://blockr.io/api/v1/tx/info/#{params[:id]}")
   end
 
   def address
-    require 'rqrcode'
-    @address_info_response = HTTParty.get("http://blockr.io/api/v1/address/info/#{params[:id]}")
-    @address_transactions_response = HTTParty.get("http://blockr.io/api/v1/address/txs/#{params[:id]}")
-    @qr = RQRCode::QRCode.new @address_info_response['data']['address']
+    #require 'rqrcode'
+    #@address_info_response = HTTParty.get("http://blockr.io/api/v1/address/info/#{params[:id]}")
+    #@address_transactions_response = HTTParty.get("http://blockr.io/api/v1/address/txs/#{params[:id]}")
+    #@qr = RQRCode::QRCode.new @address_info_response['data']['address']
   end
 end
