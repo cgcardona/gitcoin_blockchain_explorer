@@ -1,0 +1,163 @@
+#blockchain_explorer
+  #current_price{:'data-historical_prices' => @historical_prices, :'data-historical_dates' => @historical_dates, :'data-historical_times' => @historical_times}
+    %section.panel.panel-default
+      %header.panel-heading.font-bold Bitcoin Index
+      .panel-body
+        #flot-1ine{style: "height:250px"}
+      %footer.panel-footer.bg-white
+        .row.text-center.no-gutter
+          .col-xs-3.b-r.b-light
+            %p.h3.font-bold.m-t= "#{number_with_delimiter(@bitcoin_coin_info_response['data']['volume']['current'], delimiter: ',')}"
+            %p.text-muted Bitcoins currently in circulation
+          .col-xs-3.b-r.b-light
+            %p.h3.font-bold.m-t= "#{@bitcoin_coin_info_response['data']['volume']['perc']}%"
+            %p.text-muted of total coins mined
+          .col-xs-3.b-r.b-light
+            %p.h3.font-bold.m-t= "$#{number_with_precision(number_with_delimiter(@bitcoin_spot_price_response['amount'].to_f, delimiter: ','), precision: 2)}"
+            %p.text-muted Market Value
+          .col-xs-3
+            %p.h3.font-bold.m-t= "$#{number_with_precision(number_with_delimiter(@bitcoin_spot_price_response['amount'].to_f * @bitcoin_coin_info_response['data']['volume']['current'].to_f, delimiter: ','), precision: 2)}" 
+            %p.text-muted Market Cap
+  #circulation_search
+    .row
+      .col-md-12#search
+        %h5
+          %span.thin Search the
+          Blockchain
+        %p You can enter block height, transaction hash, or address
+        #search_form
+          = form_tag blockchain_search_path, method: 'post' do
+            %p= select_tag :search_type, options_for_select([['Block Height', 'block_height'], ['Transaction Hash', 'transaction_hash'], ['Address', 'address']])
+            %p
+              = text_field_tag 'search', nil, placeholder: 'block height, transaction hash, address'
+              = submit_tag 'Search'
+  #recently_mined
+    .row
+      .col-md-12
+        %h5 
+          %span.thin Recent 
+          Bitcoin
+          %span.thin Blocks
+    .row
+      .col-md-2
+        %p Height 
+      .col-md-2
+        %p Age
+      .col-md-2
+        %p Transactions
+      .col-md-2
+        %p Fee
+      .col-md-2
+        %p Days Destroyed
+      .col-md-2
+        %p Size
+    - @recently_mined_blocks_response['data'].each do |block|
+      .row
+        .col-md-2
+          %p
+            = link_to number_with_delimiter(block['nb'], delimiter: ','), block_path(block['nb'])
+        .col-md-2
+          %p= "#{time_ago_in_words(block['time_utc'])} ago"
+        .col-md-2
+          %p= "#{number_with_delimiter(block['nb_txs'], delimiter: ',')}"
+        .col-md-2
+          %p= "#{number_with_delimiter(block['fee'], delimiter: ',')} BTC"
+        .col-md-2
+          %p= "#{number_with_delimiter(block['days_destroyed'], delimiter: ',')}"
+        .col-md-2
+          %p= "#{number_to_human_size(block['size'])}"
+  #recent_transactions_sponsor
+    .row
+      .col-md-10#transactions
+        %h5 
+          %span.thin Recent
+          Bitcoins
+          %span.thin Transactions
+        .row
+          .col-md-5
+            %p Hash
+          .col-md-3
+            %p Amount
+          .col-md-2
+            %p Fee
+          .col-md-2
+            %p Days Destroyed
+        - @recent_transactions_response['data']['txs'].each do |transaction|
+          .row
+            .col-md-5
+              %p
+                = link_to truncate(transaction['tx'], length: 37), blockchain_transaction_path(transaction['tx'])
+                - if transaction['is_coinbased'] == 1
+                  %span.glyphicon.glyphicon-star-empty
+            .col-md-3
+              - if transaction['trade']['vins'].empty?
+                %p= "0 BTC"
+              - else
+                %p= "#{number_with_delimiter(transaction['trade']['vins'][0]['amount'].abs, delimiter: ',')} BTC"
+            .col-md-2
+              - fee = ['100.0', transaction['fee']].map{|x|"%g"%x}
+              %p= "#{number_with_delimiter(fee.last, delimiter: ',')} BTC"
+            .col-md-2
+              %p= "#{number_with_delimiter(transaction['days_destroyed'], delimiter: ',')}"
+/:javascript
+/  var margin = {top: 20, right: 20, bottom: 30, left: 50},
+/    width = 960 - margin.left - margin.right,
+/    height = 500 - margin.top - margin.bottom;
+/
+/  var parseDate = d3.time.format("%d-%b-%y").parse;
+/  
+/  var x = d3.time.scale()
+/      .range([0, width]);
+/  
+/  var y = d3.scale.linear()
+/      .range([height, 0]);
+/  
+/  var xAxis = d3.svg.axis()
+/      .scale(x)
+/      .orient("bottom");
+/  
+/  var yAxis = d3.svg.axis()
+/      .scale(y)
+/      .orient("left");
+/  
+/  var line = d3.svg.line()
+/      .x(function(d) { return x(d.date); })
+/      .y(function(d) { return y(d.close); });
+/  
+/  var svg = d3.select("body").append("svg")
+/      .attr("width", width + margin.left + margin.right)
+/      .attr("height", height + margin.top + margin.bottom)
+/    .append("g")
+/      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+/  
+/  console.log($('#bitcoin_stats').data('historical_price'));
+/  d3.csv.formatRows($('#bitcoin_stats').data('historical_price'), function(error, data) {
+/    console.log(data);
+/    data.forEach(function(d) {
+/      d.date = parseDate(d.date);
+/      d.close = +d.close;
+/    });
+/  
+/    x.domain(d3.extent(data, function(d) { return d.date; }));
+/    y.domain(d3.extent(data, function(d) { return d.close; }));
+/  
+/    svg.append("g")
+/        .attr("class", "x axis")
+/        .attr("transform", "translate(0," + height + ")")
+/        .call(xAxis);
+/  
+/    svg.append("g")
+/        .attr("class", "y axis")
+/        .call(yAxis)
+/      .append("text")
+/        .attr("transform", "rotate(-90)")
+/        .attr("y", 6)
+/        .attr("dy", ".71em")
+/        .style("text-anchor", "end")
+/        .text("Price ($)");
+/  
+/    svg.append("path")
+/        .datum(data)
+/        .attr("class", "line")
+/        .attr("d", line);
+/  });

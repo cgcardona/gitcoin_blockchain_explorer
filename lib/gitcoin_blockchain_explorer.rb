@@ -43,5 +43,9 @@ module GitcoinBlockchainExplorer
     def address_transactions(public_address)
       HTTParty.get("#{self.blockr_api_base}address/txs/#{public_address}")['data']
     end
+        
+    def historical(page = 1)
+      HTTParty.get("#{self.coinbase_api_base}prices/historical?page=#{page}", format: 'text/csv')
+    end
   end
 end
